@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 let http = require('https')
 let growl = require('growl')
 
