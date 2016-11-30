@@ -1,0 +1,13 @@
+{
+  "name": "playstore-monitor",
+  "description": "get notified when your app is up on the PlayStore",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "author": "Alexandre Bintz <alexandre.bintz@gmail.com>",
+  "bin": "index.js",
+  "dependencies": {
+    "growl": "^1.9.2",
+    "node-notifier": "^4.6.1"
+  }
+}
