@@ -8,6 +8,7 @@
   "bin": "index.js",
   "dependencies": {
     "growl": "^1.9.2",
+    "minimist": "^1.2.0",
     "node-notifier": "^4.6.1"
   }
 }
