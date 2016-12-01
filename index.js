@@ -2,8 +2,20 @@
 
 let http = require('https')
 let growl = require('growl')
+let minimist = require('minimist')
 
-let packageName = process.argv[2]
+let args = minimist(process.argv.slice(2), {
+  alias: {
+    'appId': ['id'],
+    'androidPackageName': ['packageName', 'p']
+  },
+  default: {
+    'appId': null,
+    'androidPackageName': null
+  }
+})
+
+let packageName = args.packageName || args.appId
 let url = 'https://play.google.com/store/apps/details?id=' + packageName
 
 function check () {
