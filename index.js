@@ -3,19 +3,24 @@
 let http = require('https')
 let growl = require('growl')
 let minimist = require('minimist')
+let duration = require('duration-js')
 
 let args = minimist(process.argv.slice(2), {
   alias: {
     'appId': ['id'],
-    'androidPackageName': ['packageName', 'p']
+    'androidPackageName': ['packageName', 'p'],
+    'timeInterval': ['t', 'time', 'interval', 'sleep']
   },
   default: {
     'appId': null,
-    'androidPackageName': null
+    'androidPackageName': null,
+    'timeInterval': '15m'
   }
 })
 
 let packageName = args.packageName || args.appId
+let timeInterval = duration.parse(args.timeInterval)
+
 let url = 'https://play.google.com/store/apps/details?id=' + packageName
 
 function check () {
@@ -30,6 +35,6 @@ function check () {
   }).end()
 }
 
-let interval = setInterval(check, 30 * 1000)
+let interval = setInterval(check, timeInterval.milliseconds())
 
 check()

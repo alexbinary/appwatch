@@ -48,6 +48,10 @@ colors@1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/colors/-/colors-1.0.3.tgz#0433f44d809680fdeb60ed260f1b0c262e82a40b"
 
+duration-js@^3.7.1:
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/duration-js/-/duration-js-3.7.1.tgz#67959eabfa98ded5daba7b393302233b7705d8fc"
+
 escape-string-regexp@^1.0.2:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
