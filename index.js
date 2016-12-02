@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+let fs = require('fs')
+let cson = require('cson')
 let http = require('https')
 let growl = require('growl')
 let minimist = require('minimist')
@@ -16,13 +18,19 @@ let args = minimist(process.argv.slice(2), {
     'appName': null,
     'appId': null,
     'androidPackageName': null,
-    'timeInterval': '15m'
+    'timeInterval': null
   }
 })
 
-let appName = args.appName
-let packageName = args.packageName || args.appId
-let timeInterval = duration.parse(args.timeInterval)
+let config = cson.parse(fs.readFileSync('./conf.cson'))
+
+config.appName = args.appName || config.appName
+config.packageName = args.packageName || args.appId || config.packageName
+config.timeInterval = duration.parse(args.timeInterval || config.timeInterval)
+
+let appName = config.appName
+let packageName = config.packageName
+let timeInterval = config.timeInterval
 
 let url = 'https://play.google.com/store/apps/details?id=' + packageName
 
