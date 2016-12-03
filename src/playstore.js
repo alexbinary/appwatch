@@ -13,13 +13,11 @@ function check (packageName, cb) {
 }
 
 function getUrl (packageName) {
-  let url = 'https://play.google.com/store/apps/details?id=' + packageName
-  return url
+  return 'https://play.google.com/store/apps/details?id=' + packageName
 }
 
 function getAppIsUp (httpResponse) {
-  let isUp = httpResponse.statusCode === 200
-  return isUp
+  return httpResponse.statusCode === 200
 }
 
 module.exports = {

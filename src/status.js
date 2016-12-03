@@ -19,13 +19,13 @@ function setStatus (status) {
 
 function getIsUp (packageName) {
   let status = getStatus()
-  let lastCheckIsUp = false
-  if (status && status.apps && status.apps[packageName] && status.apps[packageName].lastCheck) {
-    if (status.apps[packageName].lastCheck.up) {
-      lastCheckIsUp = true
-    }
-  }
-  return lastCheckIsUp
+  return (
+    status &&
+    status.apps &&
+    status.apps[packageName] &&
+    status.apps[packageName].lastCheck &&
+    status.apps[packageName].lastCheck.up
+  )
 }
 
 function setIsUp (packageName, isUp = true) {
@@ -34,7 +34,7 @@ function setIsUp (packageName, isUp = true) {
     apps: {
       [packageName]: {
         lastCheck: {
-          date: (new Date()) + '',
+          date: Date(),
           up: isUp
         }
       }
