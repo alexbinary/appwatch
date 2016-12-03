@@ -32,8 +32,8 @@ status.setFilepath(args.status)
   let timeInterval = duration.parse(conf.timeInterval)
   let mailer = email({
     smtp: conf.smtp,
-    from: conf.emailFrom,
-    to: conf.emailTo
+    from: conf.email.from,
+    to: conf.email.to
   })
   let apps = conf.apps
   for (let appId in apps) {

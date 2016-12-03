@@ -11,7 +11,9 @@ function setFilepath (path) {
 
 let configDefault = {
   timeInterval: '1h',
-  emailFrom: 'PlayStore Monitor',
+  email: {
+    from: 'PlayStore Monitor'
+  },
   smtp: {
     ssl: true
   }

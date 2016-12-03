@@ -24,8 +24,9 @@ smtp:
   ssl: true # optional
 
 # Email - Message
-emailFrom: 'PlayStore Monitor'  # optional
-emailTo: [
-  'name1 <username1@domain1.com>'
-  'name2 <username2@domain2.com>'
-]
+email:
+  from: 'PlayStore Monitor'  # optional
+  to: [
+    'name1 <username1@domain1.com>'
+    'name2 <username2@domain2.com>'
+  ]
