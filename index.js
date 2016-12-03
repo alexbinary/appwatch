@@ -10,12 +10,14 @@ let duration = require('duration-js')
 
 let args = minimist(process.argv.slice(2), {
   alias: {
+    'config': ['c'],
     'appName': ['name', 'n'],
     'appId': ['id'],
     'androidPackageName': ['packageName', 'p'],
     'timeInterval': ['t', 'time', 'interval', 'sleep']
   },
   default: {
+    'config': './conf.cson',
     'appName': null,
     'appId': null,
     'androidPackageName': null,
@@ -23,7 +25,7 @@ let args = minimist(process.argv.slice(2), {
   }
 })
 
-let config = cson.parse(fs.readFileSync('./conf.cson'))
+let config = cson.parse(fs.readFileSync(args.config))
 
 config.appName = args.appName || config.appName
 config.packageName = args.packageName || args.appId || config.packageName
