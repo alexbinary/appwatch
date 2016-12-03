@@ -1,19 +1,14 @@
 
 let bunyan = require('bunyan')
-let minimist = require('minimist')
 
-function createLogger () {
-  let args = minimist(process.argv.slice(2), {
-    default: {'log': './log.log'},
-    alias: {'log': ['l']}
-  })
+function createLogger ({filepath}) {
   let logger = bunyan.createLogger({
     name: 'playstore-monitor',
     streams: [{
       type: 'raw',
       stream: { write: (data) => console.log(data.time + data.msg) }
     }, {
-      path: args.log
+      path: filepath
     }]
   })
   return {
