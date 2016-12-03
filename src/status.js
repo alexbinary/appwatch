@@ -33,14 +33,14 @@ function getIsUp (packageName) {
   return lastCheckIsUp
 }
 
-function setIsUp (packageName) {
+function setIsUp (packageName, isUp = true) {
   let status = getStatus()
   deepAssign(status, {
     apps: {
       [packageName]: {
         lastCheck: {
           date: (new Date()) + '',
-          up: true
+          up: isUp
         }
       }
     }

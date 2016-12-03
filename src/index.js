@@ -21,12 +21,11 @@ let playstore = require('./playstore')
     if (!status.getIsUp(packageName)) {
       console.log((new Date()) + ' 🔮  Checking if ' + appName + ' (' + packageName + ') is up on the PlayStore...')
       playstore.check(packageName, (err, isUp) => {
-        if (!err) {
-          if (isUp) {
-            status.setIsUp(packageName)
-            mailAgent.send(appName, packageName)
-          }
+        let up = !err && isUp
+        if (up) {
+          mailAgent.send(appName, packageName)
         }
+        status.setIsUp(packageName, isUp)
       })
     }
   }
