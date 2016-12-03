@@ -9,31 +9,15 @@ let minimist = require('minimist')
 let duration = require('duration-js')
 
 let args = minimist(process.argv.slice(2), {
-  alias: {
-    'config': ['c'],
-    'appName': ['name', 'n'],
-    'appId': ['id'],
-    'androidPackageName': ['packageName', 'p'],
-    'timeInterval': ['t', 'time', 'interval', 'sleep']
-  },
-  default: {
-    'config': './conf.cson',
-    'appName': null,
-    'appId': null,
-    'androidPackageName': null,
-    'timeInterval': null
-  }
+  default: {'config': './conf.cson'},
+  alias: {'config': ['c']}
 })
 
 let config = cson.parse(fs.readFileSync(args.config))
 
-config.appName = args.appName || config.appName
-config.packageName = args.packageName || args.appId || config.packageName
-config.timeInterval = duration.parse(args.timeInterval || config.timeInterval)
-
 let appName = config.appName
 let packageName = config.packageName
-let timeInterval = config.timeInterval
+let timeInterval = duration.parse(config.timeInterval)
 
 let url = 'https://play.google.com/store/apps/details?id=' + packageName
 
