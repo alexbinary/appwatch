@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 let minimist = require('minimist')
-let duration = require('duration-js')
 
 var log = require('./log')
 var email = require('./email')
@@ -29,7 +28,6 @@ status.setFilepath(args.status)
 
 ;(function check () {
   let conf = config.get()
-  let timeInterval = duration.parse(conf.timeInterval)
   let mailer = email({
     smtp: conf.smtp,
     from: conf.email.from,
@@ -57,5 +55,5 @@ status.setFilepath(args.status)
       })
     }
   }
-  setTimeout(check, timeInterval.milliseconds())
+  setTimeout(check, conf.timeInterval.milliseconds())
 })()
