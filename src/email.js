@@ -1,6 +1,10 @@
 
 var email = require('emailjs')
 
+function getStoreName (isApple) {
+  return isApple ? 'AppStore' : 'PlayStore'
+}
+
 function joinAddresses (addresses) {
   let joined = ''
   for (let i in addresses) {
@@ -13,16 +17,17 @@ function joinAddresses (addresses) {
 function createAgent (config) {
   let mailServer = email.server.connect(config.smtp)
   return {
-    send: (appName, packageName, url, cb) => {
+    send: (appName, appId, url, isApple, cb) => {
+      console.log('send mail', isApple)
       mailServer.send({
         to: joinAddresses(config.to),
         from: config.from,
-        subject: '🎉  ' + appName + ' is up on the PlayStore !',
-        text: '🎉  ' + appName + ' is up on the PlayStore ! ' + url,
+        subject: '🎉  ' + appName + ' is up on the ' + getStoreName(isApple) + ' !',
+        text: '🎉  ' + appName + ' is up on the ' + getStoreName(isApple) + ' ! ' + url,
         attachment: [{
           data:
             `<html>
-              <p>🎉  <b>${appName}</b> is up on the PlayStore !</p>
+              <p>🎉  <b>${appName}</b> is up on the ${getStoreName(isApple)} !</p>
               <p><a href="${url}">${url}</a></p>
             </html>`,
           alternative: true
