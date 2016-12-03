@@ -26,17 +26,8 @@ function check () {
   checkPlayStore(packageName, (err, isUp) => {
     if (!err) {
       if (isUp) {
-        growl('🎉  ' + appName + ' is up on the PlayStore !')
-        mailServer.send({
-          to: config.emailTo,
-          from: config.emailFrom,
-          subject: '🎉  ' + appName + ' is up on the PlayStore !',
-          text: '🎉  ' + appName + ' is up on the PlayStore !'
-        }, (err, message) => {
-          if (err) {
-            console.log(err)
-          }
-        })
+        desktopNotification(appName, packageName)
+        sendEmail(appName, packageName)
         clearInterval(interval)
       }
     }
@@ -66,4 +57,21 @@ function getPlayStoreUrl (packageName) {
 function getAndroidAppIsUp (httpResponse) {
   let isUp = httpResponse.statusCode === 200
   return isUp
+}
+
+function desktopNotification (appName, packageName) {
+  growl('🎉  ' + appName + ' is up on the PlayStore !')
+}
+
+function sendEmail (appName, packageName) {
+  mailServer.send({
+    to: config.emailTo,
+    from: config.emailFrom,
+    subject: '🎉  ' + appName + ' is up on the PlayStore !',
+    text: '🎉  ' + appName + ' is up on the PlayStore !'
+  }, (err, message) => {
+    if (err) {
+      console.log(err)
+    }
+  })
 }
