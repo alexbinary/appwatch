@@ -26,7 +26,7 @@ let logger = log.createLogger({filepath: args.log})
 config.setFilepath(args.config)
 status.setFilepath(args.status)
 
-;(function check () {
+;(function run () {
   let conf = config.get()
   let mailer = email({
     smtp: conf.smtp,
@@ -55,5 +55,5 @@ status.setFilepath(args.status)
       })
     }
   }
-  setTimeout(check, conf.timeInterval.milliseconds())
+  setTimeout(run, conf.timeInterval.milliseconds())
 })()
