@@ -4,6 +4,7 @@ let duration = require('duration-js')
 
 var email = require('./email')
 let config = require('./config')
+let status = require('./status')
 let playstore = require('./playstore')
 
 ;(function check () {
@@ -16,13 +17,16 @@ let playstore = require('./playstore')
     from: conf.emailFrom,
     to: conf.emailTo
   })
-  console.log((new Date()) + ' 🔮  Checking if ' + appName + ' (' + packageName + ') is up on the PlayStore...')
-  playstore.check(packageName, (err, isUp) => {
-    if (!err) {
-      if (isUp) {
-        mailAgent.send(appName, packageName)
+  if (!status.getIsUp(packageName)) {
+    console.log((new Date()) + ' 🔮  Checking if ' + appName + ' (' + packageName + ') is up on the PlayStore...')
+    playstore.check(packageName, (err, isUp) => {
+      if (!err) {
+        if (isUp) {
+          status.setIsUp(packageName)
+          mailAgent.send(appName, packageName)
+        }
       }
-    }
-  })
+    })
+  }
   setTimeout(check, timeInterval.milliseconds())
 })()
