@@ -48,7 +48,9 @@ status.setFilepath(args.status)
         if (up) {
           let url = store.getUrl(appId)
           mailAgent.send(appName, appId, url, (err) => {
-            logger.mailError(err)
+            if (err) {
+              logger.mailError(err)
+            }
           })
         }
         status.setIsUp(appId, isUp)
