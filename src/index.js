@@ -1,28 +1,21 @@
 #!/usr/bin/env node
 
-let fs = require('fs')
-let cson = require('cson')
-let minimist = require('minimist')
 let duration = require('duration-js')
 
 var email = require('./email')
+let config = require('./config')
 let playstore = require('./playstore')
 
-let args = minimist(process.argv.slice(2), {
-  default: {'config': './conf.cson'},
-  alias: {'config': ['c']}
-})
+let conf = config.get()
 
-let config = cson.parse(fs.readFileSync(args.config))
-
-let appName = config.appName
-let packageName = config.packageName
-let timeInterval = duration.parse(config.timeInterval)
+let appName = conf.appName
+let packageName = conf.packageName
+let timeInterval = duration.parse(conf.timeInterval)
 
 let mailAgent = email({
-  smtp: config.smtp,
-  from: config.emailFrom,
-  to: config.emailTo
+  smtp: conf.smtp,
+  from: conf.emailFrom,
+  to: conf.emailTo
 })
 
 function check () {
