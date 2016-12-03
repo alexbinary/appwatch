@@ -7,6 +7,7 @@
   "author": "Alexandre Bintz <alexandre.bintz@gmail.com>",
   "bin": "src/index.js",
   "dependencies": {
+    "bunyan": "^1.8.5",
     "cson": "^4.0.0",
     "duration-js": "^3.7.1",
     "emailjs": "^1.0.8",

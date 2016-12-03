@@ -2,10 +2,13 @@
 
 let duration = require('duration-js')
 
+var log = require('./log')
 var email = require('./email')
 let config = require('./config')
 let status = require('./status')
 let playstore = require('./playstore')
+
+let logger = log.createLogger()
 
 ;(function check () {
   let conf = config.get()
@@ -19,9 +22,10 @@ let playstore = require('./playstore')
   for (let packageName in apps) {
     let appName = apps[packageName].name
     if (!status.getIsUp(packageName)) {
-      console.log((new Date()) + ' 🔮  Checking if ' + appName + ' (' + packageName + ') is up on the PlayStore...')
+      logger.check(packageName, appName)
       playstore.check(packageName, (err, isUp) => {
         let up = !err && isUp
+        logger.isUp(packageName, appName, up)
         if (up) {
           mailAgent.send(appName, packageName)
         }
