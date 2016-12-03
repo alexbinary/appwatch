@@ -7,9 +7,10 @@
 # can be anything of the form 6w5d4h3m2s1ms
 timeInterval: '1h'  # optional
 
-# App to monitor
-appName: 'Pokémon GO'
-packageName: 'com.nianticlabs.pokemongo'
+# Apps to monitor
+apps:
+  'com.nianticlabs.pokemongo':
+    name: 'Pokémon GO'
 
 # Email - SMTP
 smtp:
