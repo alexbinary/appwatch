@@ -18,7 +18,6 @@ function createAgent (config) {
   let mailServer = email.server.connect(config.smtp)
   return {
     send: (appName, appId, url, isApple, cb) => {
-      console.log('send mail', isApple)
       mailServer.send({
         to: joinAddresses(config.to),
         from: config.from,
