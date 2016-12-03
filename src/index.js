@@ -27,7 +27,8 @@ let logger = log.createLogger()
         let up = !err && isUp
         logger.isUp(packageName, appName, up)
         if (up) {
-          mailAgent.send(appName, packageName)
+          let url = playstore.getUrl(packageName)
+          mailAgent.send(appName, packageName, url)
         }
         status.setIsUp(packageName, isUp)
       })

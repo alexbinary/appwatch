@@ -23,5 +23,6 @@ function getAppIsUp (httpResponse) {
 }
 
 module.exports = {
-  check
+  check,
+  getUrl
 }
