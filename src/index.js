@@ -44,7 +44,9 @@ status.setFilepath(args.status)
         logger.isUp(packageName, appName, up)
         if (up) {
           let url = playstore.getUrl(packageName)
-          mailAgent.send(appName, packageName, url)
+          mailAgent.send(appName, packageName, url, (err) => {
+            logger.mailError(err)
+          })
         }
         status.setIsUp(packageName, isUp)
       })

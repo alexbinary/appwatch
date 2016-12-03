@@ -6,7 +6,7 @@ function createLogger ({filepath}) {
     name: 'playstore-monitor',
     streams: [{
       type: 'raw',
-      stream: { write: (data) => console.log(data.time + data.msg) }
+      stream: { write: (data) => console.log(data.time + ' ' + data.msg) }
     }, {
       path: filepath
     }]
@@ -21,6 +21,9 @@ function createLogger ({filepath}) {
       } else {
         logger.info({packageName, appName, isUp}, ' ☠️  ' + appName + ' (' + packageName + ') is not up on the PlayStore yet :(')
       }
+    },
+    mailError: (err) => {
+      logger.error(err)
     }
   }
 }
