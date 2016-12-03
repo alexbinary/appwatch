@@ -28,6 +28,9 @@ function createLogger ({filepath}) {
     },
     mailError: (err) => {
       logger.error(err)
+    },
+    nextCheck: (date) => {
+      logger.info(' 🕓  next check at ' + date)
     }
   }
 }

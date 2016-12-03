@@ -56,4 +56,8 @@ status.setFilepath(args.status)
     }
   }
   setTimeout(run, conf.checkInterval.milliseconds())
+  let now = new Date()
+  let date = new Date()
+  date.setTime(now.getTime() + conf.checkInterval.milliseconds())
+  logger.nextCheck(date)
 })()
