@@ -11,6 +11,7 @@
     "duration-js": "^3.7.1",
     "emailjs": "^1.0.8",
     "minimist": "^1.2.0",
-    "node-notifier": "^4.6.1"
+    "node-notifier": "^4.6.1",
+    "object-deep-assign": "https://github.com/alexbinary/object-deep-assign.git"
   }
 }

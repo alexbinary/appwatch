@@ -1,10 +1,11 @@
 
 # Play Store Monitor sample config file
 # Modify to your needs
+# Value marked as optional are presented with their default value
 
 # Time interval between checks
 # can be anything of the form 6w5d4h3m2s1ms
-timeInterval: '15m'
+timeInterval: '1h'  # optional
 
 # App to monitor
 appName: 'Pokémon GO'
@@ -15,8 +16,8 @@ smtp:
   user: 'username@domain.com'
   password: 'secret'
   host: 'smtp.domain.com'
-  ssl: true
+  ssl: true # optional
 
 # Email - Message
-emailFrom: 'name <username@domain.com>'
+emailFrom: 'PlayStore Monitor'  # optional
 emailTo: 'name <username@domain.com>'
