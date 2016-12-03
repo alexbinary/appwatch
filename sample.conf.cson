@@ -5,7 +5,7 @@
 
 # Time interval between checks
 # can be anything of the form 6w5d4h3m2s1ms
-timeInterval: '1h'  # optional
+checkInterval: '1h'  # optional
 
 # Apps to monitor
 apps:

@@ -11,7 +11,7 @@ function setFilepath (path) {
 }
 
 let configDefault = {
-  timeInterval: '1h',
+  checkInterval: '1h',
   email: {
     from: 'PlayStore Monitor'
   },
@@ -23,7 +23,7 @@ let configDefault = {
 function get () {
   let config = cson.parse(fs.readFileSync(filepath))
   config = deepAssign({}, configDefault, config)
-  config.timeInterval = duration.parse(config.timeInterval)
+  config.checkInterval = duration.parse(config.checkInterval)
   return config
 }
 

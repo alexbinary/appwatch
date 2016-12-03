@@ -55,5 +55,5 @@ status.setFilepath(args.status)
       })
     }
   }
-  setTimeout(run, conf.timeInterval.milliseconds())
+  setTimeout(run, conf.checkInterval.milliseconds())
 })()
