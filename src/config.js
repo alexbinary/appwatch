@@ -1,8 +1,13 @@
 
 let fs = require('fs')
 let cson = require('cson')
-let minimist = require('minimist')
 let deepAssign = require('object-deep-assign')
+
+let filepath
+
+function setFilepath (path) {
+  filepath = path
+}
 
 let configDefault = {
   timeInterval: '1h',
@@ -13,15 +18,12 @@ let configDefault = {
 }
 
 function get () {
-  let args = minimist(process.argv.slice(2), {
-    default: {'config': './conf.cson'},
-    alias: {'config': ['c']}
-  })
-  let config = cson.parse(fs.readFileSync(args.config))
+  let config = cson.parse(fs.readFileSync(filepath))
   config = deepAssign(configDefault, config)
   return config
 }
 
 module.exports = {
+  setFilepath,
   get
 }

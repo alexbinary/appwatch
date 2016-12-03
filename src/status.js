@@ -1,24 +1,19 @@
 
 let fs = require('fs')
 let cson = require('cson')
-let minimist = require('minimist')
 let deepAssign = require('object-deep-assign')
 
-function getFilePath () {
-  let args = minimist(process.argv.slice(2), {
-    default: {'status': './status.cson'},
-    alias: {'status': ['s']}
-  })
-  return args.status
+let filepath
+
+function setFilepath (path) {
+  filepath = path
 }
 
 function getStatus () {
-  let filepath = getFilePath()
   return cson.parse(fs.readFileSync(filepath)) || {}
 }
 
 function setStatus (status) {
-  let filepath = getFilePath()
   return fs.writeFileSync(filepath, cson.stringify(status, null, '  '))
 }
 
@@ -49,6 +44,7 @@ function setIsUp (packageName, isUp = true) {
 }
 
 module.exports = {
+  setFilepath,
   getIsUp,
   setIsUp
 }

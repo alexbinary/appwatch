@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+let minimist = require('minimist')
 let duration = require('duration-js')
 
 var log = require('./log')
@@ -8,7 +9,22 @@ let config = require('./config')
 let status = require('./status')
 let playstore = require('./playstore')
 
-let logger = log.createLogger()
+let args = minimist(process.argv.slice(2), {
+  default: {
+    'log': './log.log',
+    'config': './conf.cson',
+    'status': './status.cson'
+  },
+  alias: {
+    'log': ['l'],
+    'config': ['c'],
+    'status': ['s']
+  }
+})
+
+let logger = log.createLogger({filepath: args.log})
+config.setFilepath(args.config)
+status.setFilepath(args.status)
 
 ;(function check () {
   let conf = config.get()
