@@ -9,8 +9,12 @@ timeInterval: '1h'  # optional
 
 # Apps to monitor
 apps:
+  # Use package name for Android apps
   'com.nianticlabs.pokemongo':
-    name: 'Pokémon GO'
+    name: 'Pokémon GO (Android)'
+  # Use app id for iOS apps
+  '1094591345':
+    name: 'Pokémon GO (iOS)'
 
 # Email - SMTP
 smtp:
