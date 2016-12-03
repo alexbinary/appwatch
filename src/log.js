@@ -15,13 +15,13 @@ function createLogger () {
   })
   return {
     check: function (packageName, appName) {
-      logger.info(' 🔮  Checking if ' + appName + ' (' + packageName + ') is up on the PlayStore...')
+      logger.info({packageName, appName}, ' 🔮  Checking if ' + appName + ' (' + packageName + ') is up on the PlayStore...')
     },
     isUp: function (packageName, appName, isUp = true) {
       if (isUp) {
-        logger.info(' 🎉  ' + appName + ' (' + packageName + ') is up on the PlayStore!')
+        logger.info({packageName, appName, isUp}, ' 🎉  ' + appName + ' (' + packageName + ') is up on the PlayStore!')
       } else {
-        logger.info(' ☠️  ' + appName + ' (' + packageName + ') is not up on the PlayStore yet :(')
+        logger.info({packageName, appName, isUp}, ' ☠️  ' + appName + ' (' + packageName + ') is not up on the PlayStore yet :(')
       }
     }
   }
