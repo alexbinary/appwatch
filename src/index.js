@@ -2,7 +2,6 @@
 
 let fs = require('fs')
 let cson = require('cson')
-let growl = require('growl')
 let minimist = require('minimist')
 let duration = require('duration-js')
 
@@ -31,7 +30,6 @@ function check () {
   playstore.check(packageName, (err, isUp) => {
     if (!err) {
       if (isUp) {
-        desktopNotification(appName, packageName)
         mailAgent.send(appName, packageName)
         clearInterval(interval)
       }
@@ -42,7 +40,3 @@ function check () {
 let interval = setInterval(check, timeInterval.milliseconds())
 
 check()
-
-function desktopNotification (appName, packageName) {
-  growl('🎉  ' + appName + ' is up on the PlayStore !')
-}
