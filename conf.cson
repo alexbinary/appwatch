@@ -9,3 +9,14 @@ timeInterval: '15m'
 # App to monitor
 appName: 'Pokémon GO'
 packageName: 'com.nianticlabs.pokemongo'
+
+# Email - SMTP
+smtp:
+  user: 'username@domain.com'
+  password: 'secret'
+  host: 'smtp.domain.com'
+  ssl: true
+
+# Email - Message
+emailFrom: 'name <username@domain.com>'
+emailTo: 'name <username@domain.com>'

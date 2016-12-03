@@ -4,6 +4,7 @@ let fs = require('fs')
 let cson = require('cson')
 let http = require('https')
 let growl = require('growl')
+var email = require('emailjs')
 let minimist = require('minimist')
 let duration = require('duration-js')
 
@@ -34,11 +35,23 @@ let timeInterval = config.timeInterval
 
 let url = 'https://play.google.com/store/apps/details?id=' + packageName
 
+let mailServer = email.server.connect(config.smtp)
+
 function check () {
   console.log((new Date()) + ' 🔭  Checking if ' + appName + ' (' + packageName + ') is up on the PlayStore...')
   http.request(url, (res) => {
     if (res.statusCode === 200) {
       growl('🎉  ' + appName + ' is up on the PlayStore !', {open: url})
+      mailServer.send({
+        to: config.emailTo,
+        from: config.emailFrom,
+        subject: '🎉  ' + appName + ' is up on the PlayStore !',
+        text: '🎉  ' + appName + ' is up on the PlayStore !'
+      }, (err, message) => {
+        if (err) {
+          console.log(err)
+        }
+      })
       clearInterval(interval)
     }
   }).on('error', (e) => {
