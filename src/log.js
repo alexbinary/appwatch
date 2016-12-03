@@ -10,6 +10,9 @@ function createLogger () {
   let logger = bunyan.createLogger({
     name: 'playstore-monitor',
     streams: [{
+      type: 'raw',
+      stream: { write: (data) => console.log(data.time + data.msg) }
+    }, {
       path: args.log
     }]
   })
