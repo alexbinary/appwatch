@@ -30,7 +30,7 @@ status.setFilepath(args.status)
 ;(function check () {
   let conf = config.get()
   let timeInterval = duration.parse(conf.timeInterval)
-  let mailAgent = email({
+  let mailer = email({
     smtp: conf.smtp,
     from: conf.emailFrom,
     to: conf.emailTo
@@ -47,7 +47,7 @@ status.setFilepath(args.status)
         logger.isUp(appId, appName, isApple, up)
         if (up) {
           let url = store.getUrl(appId)
-          mailAgent.send(appName, appId, url, isApple, (err, msg) => {
+          mailer.send(appName, appId, url, isApple, (err, msg) => {
             if (err) {
               logger.mailError(err)
             }
