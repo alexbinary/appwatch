@@ -1,6 +1,10 @@
 
 let bunyan = require('bunyan')
 
+function getStoreName (isApple) {
+  return isApple ? 'AppStore' : 'PlayStore'
+}
+
 function createLogger ({filepath}) {
   let logger = bunyan.createLogger({
     name: 'playstore-monitor',
@@ -12,14 +16,14 @@ function createLogger ({filepath}) {
     }]
   })
   return {
-    check: (packageName, appName) => {
-      logger.info({packageName, appName}, ' 🔮  Checking if ' + appName + ' (' + packageName + ') is up on the PlayStore...')
+    check: (appId, appName, isApple) => {
+      logger.info({appId, appName, isApple}, ' 🔮  Checking if ' + appName + ' (' + appId + ') is up on the ' + getStoreName(isApple) + '...')
     },
-    isUp: (packageName, appName, isUp = true) => {
+    isUp: (appId, appName, isApple, isUp = true) => {
       if (isUp) {
-        logger.info({packageName, appName, isUp}, ' 🎉  ' + appName + ' (' + packageName + ') is up on the PlayStore!')
+        logger.info({appId, appName, isApple, isUp}, ' 🎉  ' + appName + ' (' + appId + ') is up on the ' + getStoreName(isApple) + '!')
       } else {
-        logger.info({packageName, appName, isUp}, ' ☠️  ' + appName + ' (' + packageName + ') is not up on the PlayStore yet :(')
+        logger.info({appId, appName, isApple, isUp}, ' ☠️  ' + appName + ' (' + appId + ') is not up on the ' + getStoreName(isApple) + ' yet :(')
       }
     },
     mailError: (err) => {

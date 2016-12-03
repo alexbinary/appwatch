@@ -7,6 +7,7 @@ var log = require('./log')
 var email = require('./email')
 let config = require('./config')
 let status = require('./status')
+let appstore = require('./appstore')
 let playstore = require('./playstore')
 
 let args = minimist(process.argv.slice(2), {
@@ -35,20 +36,22 @@ status.setFilepath(args.status)
     to: conf.emailTo
   })
   let apps = conf.apps
-  for (let packageName in apps) {
-    let appName = apps[packageName].name
-    if (!status.getIsUp(packageName)) {
-      logger.check(packageName, appName)
-      playstore.check(packageName, (err, isUp) => {
+  for (let appId in apps) {
+    let isApple = !Number.isNaN(Number(appId))
+    let store = isApple ? appstore : playstore
+    let appName = apps[appId].name
+    if (!status.getIsUp(appId)) {
+      logger.check(appId, appName, isApple)
+      store.check(appId, (err, isUp) => {
         let up = !err && isUp
-        logger.isUp(packageName, appName, up)
+        logger.isUp(appId, appName, isApple, up)
         if (up) {
-          let url = playstore.getUrl(packageName)
-          mailAgent.send(appName, packageName, url, (err) => {
+          let url = store.getUrl(appId)
+          mailAgent.send(appName, appId, url, (err) => {
             logger.mailError(err)
           })
         }
-        status.setIsUp(packageName, isUp)
+        status.setIsUp(appId, isUp)
       })
     }
   }
