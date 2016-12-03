@@ -13,7 +13,7 @@ function joinAddresses (addresses) {
 function createAgent (config) {
   let mailServer = email.server.connect(config.smtp)
   return {
-    send: function (appName, packageName) {
+    send: (appName, packageName) => {
       mailServer.send({
         to: joinAddresses(config.to),
         from: config.from,

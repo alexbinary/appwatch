@@ -17,10 +17,10 @@ function createLogger () {
     }]
   })
   return {
-    check: function (packageName, appName) {
+    check: (packageName, appName) => {
       logger.info({packageName, appName}, ' 🔮  Checking if ' + appName + ' (' + packageName + ') is up on the PlayStore...')
     },
-    isUp: function (packageName, appName, isUp = true) {
+    isUp: (packageName, appName, isUp = true) => {
       if (isUp) {
         logger.info({packageName, appName, isUp}, ' 🎉  ' + appName + ' (' + packageName + ') is up on the PlayStore!')
       } else {
