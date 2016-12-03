@@ -19,7 +19,7 @@ let configDefault = {
 
 function get () {
   let config = cson.parse(fs.readFileSync(filepath))
-  config = deepAssign(configDefault, config)
+  config = deepAssign({}, configDefault, config)
   return config
 }
 
