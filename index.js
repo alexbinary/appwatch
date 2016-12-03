@@ -24,7 +24,7 @@ let url = 'https://play.google.com/store/apps/details?id=' + packageName
 let mailServer = email.server.connect(config.smtp)
 
 function check () {
-  console.log((new Date()) + ' 🔭  Checking if ' + appName + ' (' + packageName + ') is up on the PlayStore...')
+  console.log((new Date()) + ' 🔮  Checking if ' + appName + ' (' + packageName + ') is up on the PlayStore...')
   http.request(url, (res) => {
     if (res.statusCode === 200) {
       growl('🎉  ' + appName + ' is up on the PlayStore !', {open: url})
