@@ -13,8 +13,8 @@ apps:
   'com.nianticlabs.pokemongo':
     name: 'Pokémon GO (Android)'
   # Use app id for iOS apps
-  '1094591345':
-    name: 'Pokémon GO (iOS)'
+  '1145275343':
+    name: 'SUPER MARIO RUN'
 
 # Email - SMTP
 smtp:
