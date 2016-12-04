@@ -10,7 +10,11 @@ function setFilepath (path) {
 }
 
 function getStatus () {
-  return cson.parse(fs.readFileSync(filepath)) || {}
+  try {
+    return cson.parse(fs.readFileSync(filepath))
+  } catch (e) {
+    return {}
+  }
 }
 
 function setStatus (status) {
