@@ -7,7 +7,7 @@ function getStoreName (isApple) {
 
 function createLogger ({filepath}) {
   let logger = bunyan.createLogger({
-    name: 'playstore-monitor',
+    name: 'appstore-monitor',
     streams: [{
       type: 'raw',
       stream: { write: (data) => console.log(data.time + ' ' + data.msg) }
