@@ -1,6 +1,6 @@
 {
-  "name": "playstore-monitor",
-  "description": "get notified when your app is up on the PlayStore",
+  "name": "appstore-monitor",
+  "description": "Get notified when your app is up on the AppStore/PlayStore ! 🚀",
   "version": "0.1.0",
   "main": "src/index.js",
   "license": "MIT",
