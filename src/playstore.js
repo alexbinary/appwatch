@@ -7,7 +7,6 @@ function check (packageName, cb) {
     let isUp = getAppIsUp(res)
     cb(null, isUp)
   }).on('error', (err) => {
-    console.error(err)
     cb(err)
   }).end()
 }
