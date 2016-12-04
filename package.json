@@ -3,16 +3,16 @@
   "description": "Get notified when your app is up on the AppStore/PlayStore ! 🚀",
   "version": "0.1.0",
   "main": "src/index.js",
-  "license": "MIT",
-  "author": "Alexandre Bintz <alexandre.bintz@gmail.com>",
   "bin": "src/index.js",
+  "repository": "https://github.com/alexbinary/appstore-monitor.git",
+  "author": "Alexandre Bintz <alexandre@bintz.io>",
+  "license": "MIT",
   "dependencies": {
     "bunyan": "^1.8.5",
     "cson": "^4.0.0",
     "duration-js": "^3.7.1",
     "emailjs": "^1.0.8",
     "minimist": "^1.2.0",
-    "node-notifier": "^4.6.1",
     "object-deep-assign": "https://github.com/alexbinary/object-deep-assign.git"
   }
 }
