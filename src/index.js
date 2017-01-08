@@ -12,7 +12,7 @@ let inputs = input.handle(process.argv.slice(2))
 let logger = log.createLogger({filepath: inputs.logpath})
 
 config.use(inputs.configpath)
-status.setFilepath(inputs.statuspath)
+status.use(inputs.statuspath)
 
 ;(function run () {
   let conf = config.getConfig()

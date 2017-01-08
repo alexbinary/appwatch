@@ -5,7 +5,7 @@ let deepAssign = require('object-deep-assign')
 
 let filepath
 
-function setFilepath (path) {
+function use (path) {
   filepath = path
 }
 
@@ -48,7 +48,7 @@ function setIsUp (packageName, isUp = true) {
 }
 
 module.exports = {
-  setFilepath,
+  use,
   getIsUp,
   setIsUp
 }
