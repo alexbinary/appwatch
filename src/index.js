@@ -16,7 +16,7 @@ status.use(inputs.statuspath)
 
 ;(function run () {
   let conf = config.getConfig()
-  let mailer = email({
+  let mailer = email.createMailer({
     smtp: conf.smtp,
     from: conf.email.from,
     to: conf.email.to
@@ -33,7 +33,7 @@ status.use(inputs.statuspath)
         logger.isUp(appId, appName, isApple, up)
         if (up) {
           let url = store.getUrl(appId)
-          mailer.send(appName, appId, url, isApple, (err, msg) => {
+          mailer.sendMail(appName, appId, url, isApple, (err, msg) => {
             if (err) {
               logger.mailError(err)
             }
