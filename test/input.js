@@ -4,7 +4,7 @@ let expect = chai.expect
 
 let input = require('./../src/input')
 
-describe('inputs', function () {
+describe('input', function () {
   it('parses args with full names', function () {
     let inputs = input.handle([
       '--configpath', 'configvalue',

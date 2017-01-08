@@ -1,16 +1,23 @@
 #!/usr/bin/env node
 
-let log = require('./log')
 let email = require('./email')
 let input = require('./input')
 let config = require('./config')
 let status = require('./status')
 let appstore = require('./appstore')
 let playstore = require('./playstore')
+let appLogger = require('./appLogger')
+let hybridLogger = require('./hybridLogger')
 
 let inputs = input.handle(process.argv.slice(2))
 
-let logger = log.createLogger({filepath: inputs.logpath})
+let logger = appLogger.create({
+  logger: hybridLogger.create({
+    name: 'appstore-monitor',
+    filepath: inputs.logpath
+  })
+})
+
 config.setFilepath(inputs.configpath)
 status.setFilepath(inputs.statuspath)
 
