@@ -6,7 +6,7 @@ let deepAssign = require('object-deep-assign')
 
 let filepath
 
-function setFilepath (path) {
+function use (path) {
   filepath = path
 }
 
@@ -20,7 +20,7 @@ let configDefault = {
   }
 }
 
-function get () {
+function getConfig () {
   let config = cson.parse(fs.readFileSync(filepath))
   config = deepAssign({}, configDefault, config)
   config.checkInterval = duration.parse(config.checkInterval)
@@ -28,6 +28,6 @@ function get () {
 }
 
 module.exports = {
-  setFilepath,
-  get
+  use,
+  getConfig
 }

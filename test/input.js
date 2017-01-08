@@ -31,7 +31,7 @@ describe('input', function () {
     expect(inputs.statuspath).to.equal('statusvalue')
     expect(inputs.logpath).to.equal('logvalue')
   })
-  it('gives default values', function () {
+  it('returns correct defaults', function () {
     let inputs = input.handle([])
     expect(inputs).to.have.property('configpath')
     expect(inputs).to.have.property('statuspath')

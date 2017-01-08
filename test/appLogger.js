@@ -5,7 +5,7 @@ let expect = chai.expect
 let appLogger = require('./../src/appLogger')
 
 describe('appLogger', function () {
-  it('check', function () {
+  it('check()', function () {
     // ## Setup
     let mockLogger = createMockLogger()
     let logger = appLogger.create({
@@ -30,7 +30,7 @@ describe('appLogger', function () {
     ])
     // ## End
   })
-  it('isUp', function () {
+  it('isUp()', function () {
     // ## Setup
     let mockLogger = createMockLogger()
     let logger = appLogger.create({
@@ -57,7 +57,7 @@ describe('appLogger', function () {
     ])
     // ## End
   })
-  it('mailError', function () {
+  it('mailError()', function () {
     // ## Setup
     let mockLogger = createMockLogger()
     let logger = appLogger.create({
@@ -75,7 +75,7 @@ describe('appLogger', function () {
     ])
     // ## End
   })
-  it('nextCheck', function () {
+  it('nextCheck()', function () {
     // ## Setup
     let mockLogger = createMockLogger()
     let logger = appLogger.create({

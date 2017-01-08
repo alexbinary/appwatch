@@ -5,7 +5,7 @@ let expect = chai.expect
 let hybridLogger = require('./../src/hybridLogger')
 
 describe('hybridLogger', function () {
-  it('works', function () {
+  it('creates logger', function () {
     // ## Setup
     let name = 'test-log'
     let filepath = 'test-log'
