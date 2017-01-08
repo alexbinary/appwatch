@@ -1,30 +1,18 @@
 #!/usr/bin/env node
 
-let minimist = require('minimist')
-
-var log = require('./log')
-var email = require('./email')
+let log = require('./log')
+let email = require('./email')
+let input = require('./input')
 let config = require('./config')
 let status = require('./status')
 let appstore = require('./appstore')
 let playstore = require('./playstore')
 
-let args = minimist(process.argv.slice(2), {
-  default: {
-    'log': './log.log',
-    'config': './conf.cson',
-    'status': './status.cson'
-  },
-  alias: {
-    'log': ['l'],
-    'config': ['c'],
-    'status': ['s']
-  }
-})
+let inputs = input.handle(process.argv.slice(2))
 
-let logger = log.createLogger({filepath: args.log})
-config.setFilepath(args.config)
-status.setFilepath(args.status)
+let logger = log.createLogger({filepath: inputs.logpath})
+config.setFilepath(inputs.configpath)
+status.setFilepath(inputs.statuspath)
 
 ;(function run () {
   let conf = config.get()
