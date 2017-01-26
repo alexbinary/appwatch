@@ -1,7 +1,7 @@
 
 let fs = require('fs')
 let cson = require('cson')
-let deepAssign = require('object-deep-assign')
+let deepAssign = require('@alexbinary/object-deep-assign')
 
 let filepath
 
