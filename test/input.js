@@ -5,39 +5,32 @@ let expect = chai.expect
 let input = require('./../src/input')
 
 describe('input', function () {
-  it('parses args with full names', function () {
-    let inputs = input.handle([
+  it('parses command line arguments (default names)', function () {
+    let inputHelper = input.createHelper()
+    let inputs = inputHelper.process([
       '--configpath', 'configvalue',
       '--statuspath', 'statusvalue',
       '--logpath', 'logvalue'
     ])
     expect(inputs).to.have.property('configpath')
-    expect(inputs).to.have.property('statuspath')
-    expect(inputs).to.have.property('logpath')
     expect(inputs.configpath).to.equal('configvalue')
+    expect(inputs).to.have.property('statuspath')
     expect(inputs.statuspath).to.equal('statusvalue')
+    expect(inputs).to.have.property('logpath')
     expect(inputs.logpath).to.equal('logvalue')
   })
-  it('parses args with short names', function () {
-    let inputs = input.handle([
+  it('parses command line arguments (short names)', function () {
+    let inputHelper = input.createHelper()
+    let inputs = inputHelper.process([
       '-c', 'configvalue',
       '-s', 'statusvalue',
       '-l', 'logvalue'
     ])
     expect(inputs).to.have.property('configpath')
-    expect(inputs).to.have.property('statuspath')
-    expect(inputs).to.have.property('logpath')
     expect(inputs.configpath).to.equal('configvalue')
-    expect(inputs.statuspath).to.equal('statusvalue')
-    expect(inputs.logpath).to.equal('logvalue')
-  })
-  it('returns correct defaults', function () {
-    let inputs = input.handle([])
-    expect(inputs).to.have.property('configpath')
     expect(inputs).to.have.property('statuspath')
+    expect(inputs.statuspath).to.equal('statusvalue')
     expect(inputs).to.have.property('logpath')
-    expect(inputs.configpath).to.equal('./config.cson')
-    expect(inputs.statuspath).to.equal('./status.cson')
-    expect(inputs.logpath).to.equal('./log.log')
+    expect(inputs.logpath).to.equal('logvalue')
   })
 })
