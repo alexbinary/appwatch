@@ -22,7 +22,6 @@ function use (configFilePath) {
 
 function getConfig () {
   let configFileConfig = getConfigFileConfig(filepath)
-  console.log(defaultConfig)
   let config = mergeRawConfigs(defaultConfig, configFileConfig)
   config = processRawConfig(config)
   return config
