@@ -1,5 +1,5 @@
 {
-  "name": "appstore-monitor",
+  "name": "appwatch",
   "description": "Get notified when your app is up on the AppStore/PlayStore ! 🚀",
   "version": "0.1.0",
   "main": "src/index.js",

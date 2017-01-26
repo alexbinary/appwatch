@@ -5,7 +5,7 @@ let hybridLogger = require('./hybridLogger')
 function createLogger ({filepath}) {
   let logger = appLogger.create({
     logger: hybridLogger.create({
-      name: 'appstore-monitor',
+      name: 'appwatch',
       filepath
     })
   })

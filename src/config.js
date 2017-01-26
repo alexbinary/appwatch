@@ -7,7 +7,7 @@ let deepAssign = require('@alexbinary/object-deep-assign')
 let defaultConfig = {
   checkInterval: '1h',
   email: {
-    from: 'AppStore Monitor'
+    from: 'AppWatch'
   },
   smtp: {
     ssl: true

@@ -1,4 +1,4 @@
-# appstore-monitor
+# appwatch
 Get notified when your app is up on the AppStore/PlayStore ! 🚀
 
 
@@ -7,7 +7,7 @@ Get notified when your app is up on the AppStore/PlayStore ! 🚀
 Install with npm
 
 ```
-$ npm i -g https://github.com/alexbinary/appstore-monitor.git
+$ npm i -g https://github.com/alexbinary/appwatch.git
 ```
 
 
@@ -35,7 +35,7 @@ email: # people listed here will get an email when an app is up
 Start monitoring :
 
 ```
-$ appstore-monitor -c /path/to/conf.cson
+$ appwatch -c /path/to/conf.cson
 ```
 
 When any of the app will become up on the store, you'll get a stylish and joyful email with the link :
@@ -52,7 +52,7 @@ You get pretty logs in the console, and logs are also written to disk.
 
 You can set the path to the logfile with the `-l` flag :
 ```
-$ appstore-monitor -l /path/to/logfile
+$ appwatch -l /path/to/logfile
 ```
 
 To read the log you need to use bunyan.
@@ -79,5 +79,5 @@ and thus send an email only once.
 
 The default location is `./status.cson` but you can change it with the `-s` flag :
 ```
-$ appstore-monitor -s /path/to/statusfile
+$ appwatch -s /path/to/statusfile
 ```

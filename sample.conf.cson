@@ -25,7 +25,7 @@ smtp:
 
 # Email - Message
 email:
-  from: 'AppStore Monitor'  # optional
+  from: 'AppWatch'  # optional
   to: [
     'name1 <username1@domain1.com>'
     'name2 <username2@domain2.com>'
