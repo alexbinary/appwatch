@@ -34,8 +34,8 @@ describe('config', function () {
       }
     }))
     // ## Test
-    config.use(testConfigFilePath)
-    let conf = config.getConfig()
+    let configHelper = config.createHelper()
+    let conf = configHelper.getConfig(testConfigFilePath)
     // ## Assert
     expect(conf).to.have.property('checkInterval')
     expect(conf.checkInterval).to.be.instanceOf(duration)

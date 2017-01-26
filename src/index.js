@@ -12,11 +12,11 @@ let scheduler = require('./scheduler')
 let inputs = input.handle(process.argv.slice(2))
 let logger = log.createLogger({filepath: inputs.logpath})
 
-config.use(inputs.configpath)
+let configHelper = config.createHelper()
 status.use(inputs.statuspath)
 
 ;(function run () {
-  let conf = config.getConfig()
+  let conf = configHelper.getConfig(inputs.configpath)
   let mailer = email.createMailer({
     smtp: conf.smtp,
     from: conf.email.from,
