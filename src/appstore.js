@@ -1,7 +1,5 @@
 
-let http = require('https')
-
-function check (packageName, cb) {
+function check (packageName, cb, {http = require('https')}) {
   let url = getUrl(packageName)
   http.request(url, (res) => {
     let isUp = getAppIsUp(res)
@@ -21,5 +19,6 @@ function getAppIsUp (httpResponse) {
 
 module.exports = {
   check,
-  getUrl
+  getUrl,
+  getAppIsUp
 }

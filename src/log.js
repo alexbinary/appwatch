@@ -1,38 +1,15 @@
 
-let bunyan = require('bunyan')
-
-function getStoreName (isApple) {
-  return isApple ? 'AppStore' : 'PlayStore'
-}
+let appLogger = require('./appLogger')
+let hybridLogger = require('./hybridLogger')
 
 function createLogger ({filepath}) {
-  let logger = bunyan.createLogger({
-    name: 'appstore-monitor',
-    streams: [{
-      type: 'raw',
-      stream: { write: (data) => console.log(data.time + ' ' + data.msg) }
-    }, {
-      path: filepath
-    }]
+  let logger = appLogger.create({
+    logger: hybridLogger.create({
+      name: 'appstore-monitor',
+      filepath
+    })
   })
-  return {
-    check: (appId, appName, isApple) => {
-      logger.info({appId, appName, isApple}, ' 🔮  Checking if ' + appName + ' (' + appId + ') is up on the ' + getStoreName(isApple) + '...')
-    },
-    isUp: (appId, appName, isApple, isUp = true) => {
-      if (isUp) {
-        logger.info({appId, appName, isApple, isUp}, ' 🎉  ' + appName + ' (' + appId + ') is up on the ' + getStoreName(isApple) + '!')
-      } else {
-        logger.info({appId, appName, isApple, isUp}, ' ☠️  ' + appName + ' (' + appId + ') is not up on the ' + getStoreName(isApple) + ' yet :(')
-      }
-    },
-    mailError: (err) => {
-      logger.error(err)
-    },
-    nextCheck: (date) => {
-      logger.info(' 🕓  next check at ' + date)
-    }
-  }
+  return logger
 }
 
 module.exports = {
