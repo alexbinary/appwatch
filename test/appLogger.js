@@ -1,109 +1,94 @@
 
 let chai = require('chai')
+let sinon = require('sinon')
 let expect = chai.expect
+chai.use(require('sinon-chai'))
 
 let appLogger = require('./../src/appLogger')
 
+function createBaseLogger () {
+  let baseLogger = {
+    info: sinon.spy(),
+    error: sinon.spy()
+  }
+  return baseLogger
+}
+
+function createAppLogger (baseLogger) {
+  let appLoggerInstance = appLogger.createLogger({
+    name: 'test',
+    logger: baseLogger
+  })
+  return appLoggerInstance
+}
+
 describe('appLogger', function () {
-  it('check()', function () {
+  it('produces log output for a check operation', function () {
     // ## Setup
-    let mockLogger = createMockLogger()
-    let logger = appLogger.create({
-      name: 'test',
-      logger: mockLogger
-    })
+    let baseLogger = createBaseLogger()
+    let appLoggerInstance = createAppLogger(baseLogger)
+    // ## TEST
     let appId = 1
     let appName = 'TEST'
     let isApple = true
-    // ## TEST
-    logger.check(appId, appName, isApple)
+    appLoggerInstance.check(appId, appName, isApple)
     // ## Assert
-    expect(mockLogger.infoArgs).to.deep.equal([
-      [
-        {
-          'appId': 1,
-          'appName': 'TEST',
-          'isApple': true
-        },
-        ' 🔮  Checking if TEST (1) is up on the AppStore...'
-      ]
-    ])
+    expect(baseLogger.info).to.be.calledWithExactly(
+      {
+        'appId': 1,
+        'appName': 'TEST',
+        'isApple': true
+      },
+      ' 🔮  Checking if TEST (1) is up on the AppStore...'
+    )
     // ## End
   })
-  it('isUp()', function () {
+  it('produces log output for a check result', function () {
     // ## Setup
-    let mockLogger = createMockLogger()
-    let logger = appLogger.create({
-      name: 'test',
-      logger: mockLogger
-    })
+    let baseLogger = createBaseLogger()
+    let appLoggerInstance = createAppLogger(baseLogger)
+    // ## TEST
     let appId = 1
     let appName = 'TEST'
     let isApple = true
     let up = true
-    // ## TEST
-    logger.isUp(appId, appName, isApple, up)
+    appLoggerInstance.isUp(appId, appName, isApple, up)
     // ## Assert
-    expect(mockLogger.infoArgs).to.deep.equal([
-      [
-        {
-          'appId': 1,
-          'appName': 'TEST',
-          'isApple': true,
-          'isUp': true
-        },
-        ' 🎉  TEST (1) is up on the AppStore!'
-      ]
-    ])
+    expect(baseLogger.info).to.be.calledWithExactly(
+      {
+        'appId': 1,
+        'appName': 'TEST',
+        'isApple': true,
+        'isUp': true
+      },
+      ' 🎉  TEST (1) is up on the AppStore!'
+    )
     // ## End
   })
-  it('mailError()', function () {
+  it('produces log output for a mail error', function () {
     // ## Setup
-    let mockLogger = createMockLogger()
-    let logger = appLogger.create({
-      name: 'test',
-      logger: mockLogger
-    })
+    let baseLogger = createBaseLogger()
+    let appLoggerInstance = createAppLogger(baseLogger)
+    // ## TEST
     let err = new Error('test error')
-    // ## TEST
-    logger.mailError(err)
+    appLoggerInstance.mailError(err)
     // ## Assert
-    expect(mockLogger.errorArgs).to.deep.equal([
-      [
-        {}
-      ]
-    ])
+    expect(baseLogger.error).to.be.calledWithExactly(
+      err
+    )
     // ## End
   })
-  it('nextCheck()', function () {
+  it('produces log output for the next check', function () {
     // ## Setup
-    let mockLogger = createMockLogger()
-    let logger = appLogger.create({
-      name: 'test',
-      logger: mockLogger
-    })
-    let date = new Date('2017-01-08 12:00:00')
+    let baseLogger = createBaseLogger()
+    let appLoggerInstance = createAppLogger(baseLogger)
     // ## TEST
-    logger.nextCheck(date)
+    let date = new Date('2017-01-08 12:00:00')
+    appLoggerInstance.nextCheck(date)
     // ## Assert
-    expect(mockLogger.infoArgs).to.deep.equal([
-      [
-        ' 🕓  next check at Sun Jan 08 2017 12:00:00 GMT+0100 (CET)'
-      ]
-    ])
+    expect(baseLogger.info).to.be.calledWithExactly(
+      ' 🕓  next check at Sun Jan 08 2017 12:00:00 GMT+0100 (CET)'
+    )
     // ## End
   })
 })
-
-function createMockLogger () {
-  return {
-    infoArgs: [],
-    errorArgs: [],
-    info () {
-      this.infoArgs.push([...arguments])
-    },
-    error () {
-      this.errorArgs.push([...arguments])
-    }
-  }
-}
