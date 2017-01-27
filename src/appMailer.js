@@ -12,8 +12,8 @@ function joinAddresses (addresses) {
   return joined
 }
 
-function create ({mailer, config}) {
-  let agent = {
+function createMailer ({mailer, config}) {
+  let instance = {
     sendMail (appName, appId, url, isApple, cb) {
       mailer.send({
         to: joinAddresses(config.to),
@@ -31,9 +31,9 @@ function create ({mailer, config}) {
       }, cb)
     }
   }
-  return agent
+  return instance
 }
 
 module.exports = {
-  create
+  createMailer
 }
