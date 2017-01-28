@@ -1,15 +1,10 @@
 
 let fs = require('fs')
 let cson = require('cson')
+
 let deepAssign = require('@alexbinary/object-deep-assign')
 
-let filepath
-
-function use (path) {
-  filepath = path
-}
-
-function getStatus () {
+function getStatus (filepath) {
   try {
     return cson.parse(fs.readFileSync(filepath))
   } catch (e) {
@@ -17,12 +12,12 @@ function getStatus () {
   }
 }
 
-function setStatus (status) {
+function setStatus (filepath, status) {
   return fs.writeFileSync(filepath, cson.stringify(status, null, '  '))
 }
 
-function getIsUp (packageName) {
-  let status = getStatus()
+function getIsUp (filepath, packageName) {
+  let status = getStatus(filepath)
   return (
     status &&
     status.apps &&
@@ -32,8 +27,8 @@ function getIsUp (packageName) {
   )
 }
 
-function setIsUp (packageName, isUp = true) {
-  let status = getStatus()
+function setIsUp (filepath, packageName, isUp = true) {
+  let status = getStatus(filepath)
   deepAssign(status, {
     apps: {
       [packageName]: {
@@ -44,11 +39,10 @@ function setIsUp (packageName, isUp = true) {
       }
     }
   })
-  setStatus(status)
+  setStatus(filepath, status)
 }
 
 module.exports = {
-  use,
   getIsUp,
   setIsUp
 }

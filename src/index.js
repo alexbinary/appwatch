@@ -12,8 +12,6 @@ let scheduler = require('./scheduler')
 let inputs = input.parseCliArgs(process.argv.slice(2))
 let logger = log.createLogger({filepath: inputs.logpath})
 
-status.use(inputs.statuspath)
-
 ;(function run () {
   let config = conf.getConfig(inputs.configpath)
   let mailer = mail.createMailer({
@@ -26,7 +24,7 @@ status.use(inputs.statuspath)
     let isApple = !Number.isNaN(Number(appId))
     let store = isApple ? appstore : playstore
     let appName = apps[appId].name
-    if (!status.getIsUp(appId)) {
+    if (!status.getIsUp(inputs.statuspath, appId)) {
       logger.check(appId, appName, isApple)
       store.check(appId, (err, isUp) => {
         let up = !err && isUp
@@ -39,7 +37,7 @@ status.use(inputs.statuspath)
             }
           })
         }
-        status.setIsUp(appId, isUp)
+        status.setIsUp(inputs.statuspath, appId, isUp)
       })
     }
   }
