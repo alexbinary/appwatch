@@ -9,8 +9,7 @@ let appstore = require('./appstore')
 let playstore = require('./playstore')
 let scheduler = require('./scheduler')
 
-let inputHelper = input.createHelper()
-let inputs = inputHelper.process(process.argv.slice(2))
+let inputs = input.parseCliArgs(process.argv.slice(2))
 let logger = log.createLogger({filepath: inputs.logpath})
 
 status.use(inputs.statuspath)
