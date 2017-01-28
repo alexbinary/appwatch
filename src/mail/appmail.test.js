@@ -8,7 +8,7 @@ let baseMailer = {
   send: sinon.spy()
 }
 
-let appmailer = require('./appmailer')
+let appmailer = require('./appmail')
 
 describe('appmailer', function () {
   it('sends notification email', function () {

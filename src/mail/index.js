@@ -4,7 +4,7 @@ var mail = require('./mail')
 
 function createMailer (config) {
   return appmail.createMailer({
-    mailer: mail.createMailer(config.smtp),
+    mailer: mail.createMailer({config: config.smtp}),
     config
   })
 }
