@@ -1,15 +1,14 @@
 
 let applog = require('./applog')
-let hybridLogger = require('./hybridLogger')
+let hybridlog = require('./hybridlog')
 
 function createLogger ({filepath}) {
-  let logger = applog.logger({
-    logger: hybridLogger.create({
+  return applog.createLogger({
+    logger: hybridlog.createLogger({
       name: 'appwatch',
       filepath
     })
   })
-  return logger
 }
 
 module.exports = {

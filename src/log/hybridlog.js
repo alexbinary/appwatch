@@ -1,8 +1,6 @@
 
-let bunyan = require('bunyan')
-
-function create ({name, filepath}) {
-  let logger = bunyan.createLogger({
+function createLogger ({name, filepath, bunyan = require('bunyan')}) {
+  return bunyan.createLogger({
     name,
     streams: [
       {
@@ -18,9 +16,8 @@ function create ({name, filepath}) {
       }
     ]
   })
-  return logger
 }
 
 module.exports = {
-  create
+  createLogger
 }

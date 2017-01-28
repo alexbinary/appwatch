@@ -4,7 +4,7 @@ let sinon = require('sinon')
 let expect = chai.expect
 chai.use(require('sinon-chai'))
 
-let applog = require('./../src/applog')
+let applog = require('./applog')
 
 let baseLogger = {
   info: sinon.spy(),
@@ -14,7 +14,7 @@ let baseLogger = {
 describe('applog', function () {
   it('produces log output for a check operation', function () {
     // ## Setup
-    let logger = applog.logger({logger: baseLogger})
+    let logger = applog.createLogger({logger: baseLogger})
     // ## TEST
     let appId = 1
     let appName = 'TEST'
@@ -33,7 +33,7 @@ describe('applog', function () {
   })
   it('produces log output for a check result', function () {
     // ## Setup
-    let logger = applog.logger({logger: baseLogger})
+    let logger = applog.createLogger({logger: baseLogger})
     // ## TEST
     let appId = 1
     let appName = 'TEST'
@@ -54,7 +54,7 @@ describe('applog', function () {
   })
   it('produces log output for a mail error', function () {
     // ## Setup
-    let logger = applog.logger({logger: baseLogger})
+    let logger = applog.createLogger({logger: baseLogger})
     // ## TEST
     let err = new Error('test error')
     logger.mailError(err)
@@ -66,7 +66,7 @@ describe('applog', function () {
   })
   it('produces log output for the next check', function () {
     // ## Setup
-    let logger = applog.logger({logger: baseLogger})
+    let logger = applog.createLogger({logger: baseLogger})
     // ## TEST
     let date = new Date('2017-01-08 12:00:00')
     logger.nextCheck(date)
