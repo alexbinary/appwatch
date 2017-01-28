@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 let log = require('./log')
-let email = require('./email')
+let mail = require('./mail')
 let input = require('./input')
 let config = require('./config')
 let status = require('./status')
@@ -18,7 +18,7 @@ status.use(inputs.statuspath)
 
 ;(function run () {
   let conf = configHelper.getConfig(inputs.configpath)
-  let mailer = email.createMailer({
+  let mailer = mail.createMailer({
     smtp: conf.smtp,
     from: conf.email.from,
     to: conf.email.to

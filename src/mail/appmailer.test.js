@@ -4,21 +4,21 @@ let sinon = require('sinon')
 let expect = chai.expect
 chai.use(require('sinon-chai'))
 
-let appMailer = require('./../src/appMailer')
+let baseMailer = {
+  send: sinon.spy()
+}
 
-describe('appMailer', function () {
+let appmailer = require('./appmailer')
+
+describe('appmailer', function () {
   it('sends notification email', function () {
     // ## Setup
-    let baseMailer = {
-      send: sinon.spy()
-    }
-    let config = {
-      to: ['to1', 'to2'],
-      from: 'from'
-    }
-    let appMailerInstance = appMailer.createMailer({
+    let mailer = appmailer.createMailer({
       mailer: baseMailer,
-      config
+      config: {
+        to: ['to1', 'to2'],
+        from: 'from'
+      }
     })
     // ## TEST
     let appName = 'app.name'
@@ -26,7 +26,7 @@ describe('appMailer', function () {
     let url = 'url'
     let isApple = false
     let cb = () => {}
-    appMailerInstance.sendMail(appName, appId, url, isApple, cb)
+    mailer.sendMail(appName, appId, url, isApple, cb)
     // ## Assert
     expect(baseMailer.send).to.be.calledWithExactly(
       {

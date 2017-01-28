@@ -13,7 +13,7 @@ function joinAddresses (addresses) {
 }
 
 function createMailer ({mailer, config}) {
-  let instance = {
+  return {
     sendMail (appName, appId, url, isApple, cb) {
       mailer.send({
         to: joinAddresses(config.to),
@@ -31,7 +31,6 @@ function createMailer ({mailer, config}) {
       }, cb)
     }
   }
-  return instance
 }
 
 module.exports = {
