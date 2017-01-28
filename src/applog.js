@@ -3,8 +3,8 @@ function getStoreName (isApple) {
   return isApple ? 'AppStore' : 'PlayStore'
 }
 
-function createLogger ({logger}) {
-  let instance = {
+function logger ({logger}) {
+  return {
     check (appId, appName, isApple) {
       logger.info({appId, appName, isApple}, ' 🔮  Checking if ' + appName + ' (' + appId + ') is up on the ' + getStoreName(isApple) + '...')
     },
@@ -22,9 +22,8 @@ function createLogger ({logger}) {
       logger.info(' 🕓  next check at ' + date)
     }
   }
-  return instance
 }
 
 module.exports = {
-  createLogger
+  logger
 }
